@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Users;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -29,6 +30,8 @@ class LoginController extends Controller
         if ($user = Auth::attempt(['email' => $email, 'password' => $password], $renember)) {
             return redirect()->route('admin');
         }
+
+        Session::flash('error', 'Eamil hoặc password không đúng');
         return redirect()->back()->withInput();
     }
 }
