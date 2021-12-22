@@ -34,5 +34,6 @@ Route::middleware(['auth'])->group(function(){
         });
     });
 });
+
 // Logout route
 Route::get('/logout', [ MainController::class , 'logout']);
