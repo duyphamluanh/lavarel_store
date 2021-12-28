@@ -18,7 +18,7 @@
 
 
 @if (Session::has('success'))
-<div class="alert alert-danger">
+<div class="alert alert-success">
     <ul class='mb-0'>
             <li>{{ Session::get('success') }}</li>
     </ul>

@@ -8,18 +8,8 @@
 <form action="" method="POST">
     <div class="card-body">
         <div class="form-group">
-            <label for="menu">Tên danh mục</label>
-            <input type="text" name="name" class="form-control" id="menu" placeholder="Nhập tên danh mục">
-        </div>
-
-        <div class="form-group">
-            <label for="parent-id">Danh mục cha</label>
-            <select class="form-control" name="parent_id" id="parent-id" >
-              <option value="0">Chọn danh mục</option>
-              @foreach ($parents as $parent)
-                <option value="{{ $parent->id }}">{{ $parent->name }}</option>
-              @endforeach   
-            </select>
+            <label for="product">Tên sản phẩm</label>
+            <input type="text" name="name" class="form-control" id="product" placeholder="Nhập tên sản phẩm">
         </div>
         <div class="form-group">
             <label for="description">Mô tả</label>
@@ -29,7 +19,31 @@
           <label for="content">Mô tả chi tiết</label>
           <textarea type="text" name="content" class="form-control" id="content" placeholder="Nhập mô tả chi tiết"></textarea>
         </div>
-
+        <div class="form-group">
+            <label for="menu-id">Danh mục cha</label>
+            <select class="form-control" name="menu-id" id="menu-id" >
+              <option value="0">Chọn danh mục</option>
+              @foreach ($parents as $parent)
+                <option value="{{ $parent->id }}">{{ $parent->name }}</option>
+              @endforeach   
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="price">Giá</label>
+            <input type="text" name="price" class="form-control" id="price" placeholder="Nhập giá sản phẩm">
+        </div>
+        <div class="form-group">
+            <label for="price_sale">Giá bán</label>
+            <input type="text" name="price_sale" class="form-control" id="price_sale" placeholder="Nhập giá bán sản phẩm">
+        </div>
+        <div class="form-group">
+            <label for="upload">Ảnh</label>
+            <input type="file" class="form-control" id="upload">
+            <div id="image_show">
+              
+            </div>
+            <input hidden name="image" id="file">
+        </div>
         <div class="form-group">
           <label>Hoạt động</label>
           <div class="custom-control custom-radio">

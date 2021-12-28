@@ -58,6 +58,27 @@
             </ul>
           </li>
           <li class="nav-item">
+            <a href="#" class="nav-link">
+              <p>Sản phẩm
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/admin/product/add" class="nav-link">
+                  <i class="far fa-plus-square nav-icon"></i>
+                  <p>Thêm sản phẩm</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/admin/product/list" class="nav-link">
+                  <i class="fas fa-list nav-icon"></i>
+                  <p>Danh sách sản phẩm</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
             <a href="/logout" class="nav-link">
               <p>
                   <strong>Log out</strong>
