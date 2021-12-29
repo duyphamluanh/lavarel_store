@@ -12,7 +12,15 @@ class ProductService{
     public function create($request) {
         try {
             Product::create([
-              
+                'name'=> (string)$request->input('name'),
+                'description'=> (string)$request->input('description'),
+                'content'=> (string)$request->input('content'),
+                'slug'=> Str::slug($request->input('name'),'-'),
+                'image'=> (int)$request->input('image'),
+                'menu_id'=> (int)$request->input('parent_id'),
+                'price'=>(int)$request->input('price'),
+                'price_sale'=>(int)$request->input('price_sale'),
+                'active'=> (string)$request->input('active')
             ]);
             Session::flash('success', 'Tạo sản phẩm thành công');
         } catch (\Exception $err) {

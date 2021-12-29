@@ -48,10 +48,10 @@ $('#upload').change(function(){
         data: form,
         url: '/admin/upload/services',
         success: function(result){
-            if(error === false){
+            if(result.error === false){
                 $('#image_show').html('<a style="display: block; width: auto;" href="'+result.url
                     +'" target="_blank">'
-                    +'<img style="display: block" class="mx-auto mt-3" width="80%" src="'+result.url
+                    +'<img style="display: block" class="mx-auto mt-3" src="'+result.url
                     +'" /><a/>')
                 $('#file').val(result.url);
             }else{
