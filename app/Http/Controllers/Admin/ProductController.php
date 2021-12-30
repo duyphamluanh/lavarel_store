@@ -4,7 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductFormRequest;
 use App\Http\Service\Product\ProductService;
+use App\Models\Product;
+use Illuminate\Http\JsonResponse;
+
 
 class ProductController extends Controller
 {
@@ -21,7 +25,11 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        // dd($this->productService->get_all());
+        return view('admin.product.list', [
+            'title' => 'Danh sách sản phẩm',
+            'products' => $this->productService->get_all()
+        ]);
     }
 
     /**
@@ -33,7 +41,7 @@ class ProductController extends Controller
     {
         return view('admin.product.add', [
             'title' => 'Thêm sản phẩm mới',
-            'parents' => $this->productService->get_all_menu()
+            'menus' => $this->productService->get_all_menu()
         ]);
     }
 
@@ -43,8 +51,9 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductFormRequest $request)
     {
+        // dd($request->input());
         $result = $this->productService->create($request);
         return redirect()->back();
     }
@@ -66,9 +75,13 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        //
+        return  view('admin.product.edit', [
+            'title' => 'Chỉnh sửa sản phẩm '.$product->name,
+            'product' => $product,
+            'menus' => $this->productService->get_all_menu()
+        ]);
     }
 
     /**
@@ -78,9 +91,10 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Product $product, ProductFormRequest $request){
+
+        $result = $this->productService->update($product, $request);
+        return redirect('/admin/product/list');
     }
 
     /**
@@ -89,8 +103,18 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request): JsonResponse
     {
-        //
+        $result = $this->productService->destroy($request);
+        if ($result) {
+            return response()->json([
+                'error' => false,
+                'message' => 'Xóa thành công sản phẩm'
+            ]);
+        }
+
+        return response()->json([
+            'error' => true
+        ]);
     }
 }

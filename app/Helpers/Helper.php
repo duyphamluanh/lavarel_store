@@ -4,10 +4,11 @@ namespace App\Helpers;
 
 class Helper{
     public static function menu($menus, $parent_id = 0, $char = ''){
-        $html = '<tr>';
+        $html = '';
         foreach($menus as $key => $menu){
             if($menu->parent_id == $parent_id){
                 $html .= "
+                <tr>
                     <th></th>
                     <th>".$menu->id."</th>
                     <th>".$char.$menu->name."</th>
@@ -21,6 +22,7 @@ class Helper{
                             <i class='far fa-trash-alt'></i>
                         </a>
                     </th>
+                </tr>
                ";
 
                 unset($menus[$key]);
@@ -28,7 +30,30 @@ class Helper{
                 $html .= self::menu($menus, $menu->id, $char.'--');
             }
         }
-        $html .= '</tr>';
+        return  $html;
+    }
+
+    public static function product($products){
+        $html = "";
+        foreach($products as $product){
+            $html .= "
+            <tr>
+                <th></th>
+                <th>".$product->id."</th>
+                <th>".$product->name."</th>
+                <th>".self::active($product->active)."</th>
+                <th>".$product->updated_at."</th>
+                <th>
+                    <a class='btn btn-primary btn-sm' href='/admin/product/edit/".$product->id."'>
+                        <i class='fas fa-edit'></i>
+                    </a>
+                    <a class='btn btn-danger btn-sm' href='#' onclick='removeRow(".$product->id.", `/admin/product/destroy`)'>
+                        <i class='far fa-trash-alt'></i>
+                    </a>
+                </th>
+            </tr>
+            ";
+        }
         return  $html;
     }
 

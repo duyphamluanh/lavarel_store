@@ -20,11 +20,11 @@
           <textarea type="text" name="content" class="form-control" id="content" placeholder="Nhập mô tả chi tiết"></textarea>
         </div>
         <div class="form-group">
-            <label for="menu-id">Danh mục cha</label>
-            <select class="form-control" name="menu-id" id="menu-id" >
+            <label for="menu_id">Danh mục</label>
+            <select class="form-control" name="menu_id" id="menu_id" >
               <option value="0">Chọn danh mục</option>
-              @foreach ($parents as $parent)
-                <option value="{{ $parent->id }}">{{ $parent->name }}</option>
+              @foreach ($menus as $menu)
+                <option value="{{ $menu->id }}">{{ $menu->name }}</option>
               @endforeach   
             </select>
         </div>
@@ -42,7 +42,7 @@
             <div id="image_show">
               
             </div>
-            <input hidden name="image" id="file">
+            <input type="text" hidden name="image" id="file" value="">
         </div>
         <div class="form-group">
           <label>Hoạt động</label>
