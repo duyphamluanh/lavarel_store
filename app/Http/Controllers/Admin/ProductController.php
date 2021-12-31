@@ -8,7 +8,7 @@ use App\Http\Requests\ProductFormRequest;
 use App\Http\Service\Product\ProductService;
 use App\Models\Product;
 use Illuminate\Http\JsonResponse;
-
+use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
@@ -54,6 +54,8 @@ class ProductController extends Controller
     public function store(ProductFormRequest $request)
     {
         // dd($request->input());
+        // dd(intval($request->input('price')) != 0 && intval($request->input('price_sale')) != 0
+        // && (intval($request->input('price')) < intval($request->input('price_sale'))));
         $result = $this->productService->create($request);
         return redirect()->back();
     }
@@ -77,6 +79,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
+        // dd($product->active);
         return  view('admin.product.edit', [
             'title' => 'Chỉnh sửa sản phẩm '.$product->name,
             'product' => $product,
@@ -117,4 +120,5 @@ class ProductController extends Controller
             'error' => true
         ]);
     }
+
 }
